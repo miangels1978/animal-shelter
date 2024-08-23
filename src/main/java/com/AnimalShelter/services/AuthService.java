@@ -3,7 +3,7 @@ package com.AnimalShelter.services;
 import com.AnimalShelter.dtos.request.LoginRequest;
 import com.AnimalShelter.dtos.request.RegisterRequest;
 import com.AnimalShelter.dtos.response.AuthResponse;
-import com.AnimalShelter.repositories.UserRepository;
+import com.AnimalShelter.repositories.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +19,7 @@ public class AuthService {
 
     private final JwtService jwtService;
 
-    private final UserRepository userRepository;
+    private final IUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     private final AuthenticationManager authenticationManager;
