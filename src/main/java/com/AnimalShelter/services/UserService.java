@@ -9,7 +9,7 @@ public class UserService {
     @Autowired
     IUserRepository iUserRepository;
 
-    public void deleteUser(Long id){
+    public void deleteUserById(Long id){
         iUserRepository.deleteById(id);
     }
     public void deleteAllUsers(){
