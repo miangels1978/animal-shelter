@@ -1,4 +1,4 @@
-package com.AnimalShelter.controllers;
+/*package com.AnimalShelter.controllers;
 
 import com.AnimalShelter.dtos.request.LoginRequest;
 import com.AnimalShelter.dtos.request.RegisterRequest;
@@ -29,3 +29,4 @@ public class AuthController {
         return ResponseEntity.ok (authService.register(request));
     }
 }
+*/
