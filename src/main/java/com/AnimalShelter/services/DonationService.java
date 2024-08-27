@@ -9,4 +9,11 @@ public class DonationService {
 
     @Autowired
     IDonationRepository iDonationRepository;
+
+    public void deleteDonationById(Long id){
+        iDonationRepository.deleteById(id);
+    }
+    public void deleteAllDonations(){
+        iDonationRepository.deleteAll();
+    }
 }
