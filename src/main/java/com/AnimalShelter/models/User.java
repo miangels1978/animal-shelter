@@ -35,8 +35,6 @@ public class User implements UserDetails {
     @Column
     private String password;
 
-    @Column
-    private List<Integer> adoptedPetIds;
 
     @Enumerated(EnumType.STRING)
     private ERole role;
