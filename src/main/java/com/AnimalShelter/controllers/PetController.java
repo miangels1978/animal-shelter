@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/pet")
+@RequestMapping("/api/v1/pets")
 @CrossOrigin(origins = "*")
 
 public class PetController {
