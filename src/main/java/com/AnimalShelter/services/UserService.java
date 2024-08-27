@@ -8,4 +8,11 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     IUserRepository iUserRepository;
+
+    public void deleteUser(Long id){
+        iUserRepository.deleteById(id);
+    }
+    public void deleteAllUsers(){
+        iUserRepository.deleteAll();
+    }
 }
