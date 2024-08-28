@@ -23,10 +23,7 @@ public class Donation {
     private long id;
 
     @Column
-    private String name;
-
-    @Column
-    private String donation;
+    private double donation;
 
     @ManyToOne
     @JoinColumn (name = "idUser", nullable = false)
