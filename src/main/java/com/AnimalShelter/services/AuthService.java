@@ -3,11 +3,11 @@ package com.AnimalShelter.services;
 import com.AnimalShelter.dtos.request.LoginRequest;
 import com.AnimalShelter.dtos.request.RegisterRequest;
 import com.AnimalShelter.dtos.response.AuthResponse;
+import com.AnimalShelter.models.User;
 import com.AnimalShelter.repositories.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public AuthResponse login(LoginRequest login) {
-        authenticationManager.authenticate (new UsernamePasswordAuthenticationToken (login.getUsername (),login.getPassword ()));
+        authenticationManager.authenticate (new UsernamePasswordAuthenticationToken(login.getUsername (),login.getPassword ()));
 
         UserDetails user = userRepository.findByUsername (login.getUsername ()).orElseThrow ();
 
@@ -37,8 +37,8 @@ public class AuthService {
                 .build ();
     }
     @Transactional
-    public AuthResponse register(RegisterRequest register){
-        User user = User.builder ()
+   public AuthResponse register(RegisterRequest register){
+        User user = User.builder()
                 .username (register.getUsername ())
                 .email(register.getEmail())
                 .password(passwordEncoder.encode (register.getPassword ()))

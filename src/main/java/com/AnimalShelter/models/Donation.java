@@ -26,7 +26,7 @@ public class Donation {
     private String name;
 
     @Column
-    private String donation;
+    private Double amount;
 
     @ManyToOne
     @JoinColumn (name = "idUser", nullable = false)
