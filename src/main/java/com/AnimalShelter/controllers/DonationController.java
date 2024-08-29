@@ -1,6 +1,7 @@
 package com.AnimalShelter.controllers;
 
 import com.AnimalShelter.models.Donation;
+import com.AnimalShelter.repositories.IDonationRepository;
 import com.AnimalShelter.services.DonationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,8 @@ public class DonationController {
     @Autowired
     DonationService donationService;
 
+
+//borrar IDonationRepository y sustituir linea 26 cuando esten los otros metodos
 
     @DeleteMapping(path = "/donation/{id}")
     public ResponseEntity<String> deleteDonationById(@PathVariable Long id) {
