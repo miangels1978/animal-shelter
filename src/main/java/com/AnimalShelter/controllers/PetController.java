@@ -1,10 +1,12 @@
 package com.AnimalShelter.controllers;
 
+import com.AnimalShelter.models.Pet;
 import com.AnimalShelter.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/pets")
@@ -13,4 +15,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class PetController {
     @Autowired
     PetService petService;
+
+    @GetMapping(path = "")
+        public List<Pet> getAllAvailablePets() {
+        return petService.getAllAvailablePets();
+    }
+    @GetMapping(path = "")
+    public List<Pet> getAllAdoptedPets(){
+        return petService.getAllAdoptedPets();
+    }
+    @GetMapping(path = "")
+    public List<Pet> getAllPets(){
+        return petService.getAllPets();
+    }
+    @GetMapping(path = "/Pet/{id}")
+    public Optional<Pet> getPetById(@PathVariable long id){
+        return petService.getPetById(id);
+    }
 }
+
