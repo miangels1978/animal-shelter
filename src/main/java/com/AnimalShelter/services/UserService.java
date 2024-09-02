@@ -1,5 +1,6 @@
 package com.AnimalShelter.services;
 
+import com.AnimalShelter.models.User;
 import com.AnimalShelter.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,4 +9,9 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     IUserRepository iUserRepository;
+
+    public User createUser(User user) {
+        return iUserRepository.save(user);
+    }
+
 }

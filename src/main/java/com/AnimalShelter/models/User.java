@@ -1,5 +1,6 @@
 package com.AnimalShelter.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -37,10 +38,12 @@ public class User implements UserDetails {
 
     @OneToMany (mappedBy = "user")
     @JsonManagedReference ("user")
+
     private List<Donation> donationList;
 
     @OneToMany (mappedBy = "user")
     @JsonManagedReference ("user")
+
     private List<Pet> petList;
 
     @Override
