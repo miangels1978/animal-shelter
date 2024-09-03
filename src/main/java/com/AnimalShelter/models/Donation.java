@@ -20,7 +20,7 @@ public class Donation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column
-    private long id;
+    private long idDonation;
 
     @Column
     private String name;

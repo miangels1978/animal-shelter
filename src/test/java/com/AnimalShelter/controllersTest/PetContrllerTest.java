@@ -54,18 +54,18 @@ public class PetContrllerTest {
 
         mockMvc.perform(delete("/api/v1/pets/pet/{id}", 1L))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Donation deleted successfully"));
+                .andExpect(content().string("Pet deleted successfully"));
 
         verify(petService).deletePetById(1L);
     }
+
     @Test
-    public void test_if_deleteByID_deletes_all_pets() throws Exception{
-            doNothing().when(petService).deleteAllPets();
+    public void test_if_deleteByID_deletes_all_pets() throws Exception {
+        doNothing().when(petService).deleteAllPets();
 
-            mockMvc.perform(delete("/api/v1/pets"))
-                    .andExpect(status().isOk());
+        mockMvc.perform(delete("/api/v1/pets"))
+                .andExpect(status().isOk());
 
-            verify(petService).deleteAllPets();
-        }
+        verify(petService).deleteAllPets();
     }
 }

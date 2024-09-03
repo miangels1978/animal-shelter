@@ -53,20 +53,21 @@ public class UserControllerTest {
 
         mockMvc.perform(delete("/api/v1/users/user/{id}", 1L))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Donation deleted successfully"));
+                .andExpect(content().string("User deleted successfully"));
 
         verify(userService).deleteUserById(1L);
     }
+
     @Test
-    public void test_if_deleteByID_deletes_all_users() throws Exception{
-            doNothing().when(userService).deleteAllUsers();
+    public void test_if_deleteByID_deletes_all_users() throws Exception {
+        doNothing().when(userService).deleteAllUsers();
 
-            mockMvc.perform(delete("/api/v1/users"))
-                    .andExpect(status().isOk());
+        mockMvc.perform(delete("/api/v1/users"))
+                .andExpect(status().isOk());
 
-            verify(userService).deleteAllUsers();
-        }
+        verify(userService).deleteAllUsers();
     }
-    }
-
 }
+
+
+
