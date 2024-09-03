@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/pet")
+@RequestMapping("/api/v1/pets")
 @CrossOrigin(origins = "*")
 
 public class PetController {
     @Autowired
     PetService petService;
 
-    @PostMapping(path = "/pets")
+    @PostMapping
     public Pet addNewPet(@RequestBody Pet pet){ return petService.addNewPet(pet);    }
 
 }
