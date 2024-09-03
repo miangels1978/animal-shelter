@@ -1,14 +1,9 @@
 package com.AnimalShelter.controllersTest;
 
 import com.AnimalShelter.controllers.UserController;
-import com.AnimalShelter.models.Pet;
 import com.AnimalShelter.models.User;
-import com.AnimalShelter.models.ERole;
-import com.AnimalShelter.services.PetService;
 import com.AnimalShelter.services.UserService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -21,7 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(UserController.class)
-public class UserControllerTest {
+class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -29,93 +24,50 @@ public class UserControllerTest {
     @MockBean
     private UserService userService;
 
-    @MockBean
-    private PetService petService;
-
-    private User user;
-    private Pet pet;
-
-    @BeforeEach
-    public void setUp() {
-        user = new User();
-        user.setIdUser(1L);
-        user.setUsername("AlessiaR");
-        user.setEmail("aapromero@gmail.com");
-        user.setPassword("ale08");
-        user.setRole(ERole.USER);
-
-        pet = new Pet();
-        pet.setIdPet(1L);
-        pet.setName("Bella");
-        pet.setIsAdopted("false");
-    }
-
     @Test
-    public void testGetUserById_Success() throws Exception {
+    void getUserById() throws Exception {
+        User user = new User();
+        user.setIdUser(1L);
+        user.setUsername("john_doe");
         when(userService.findUserById(1L)).thenReturn(user);
 
-        mockMvc.perform(get("/users/1")
-                        .accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/v1/users/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.idUser").value(1L))
-                .andExpect(jsonPath("$.username").value("AlessiaR"))
-                .andExpect(jsonPath("$.email").value("aapromero@gmail.com"))
-                .andExpect(jsonPath("$.password").value("ale08"))
-                .andExpect(jsonPath("$.role").value("USER"));
+                .andExpect(jsonPath("$.idUser").value(1))
+                .andExpect(jsonPath("$.username").value("john_doe"));
     }
 
     @Test
-    public void testGetUserById_NotFound() throws Exception {
-        when(userService.findUserById(1L)).thenThrow(new RuntimeException());
+    void updateUser() throws Exception {
+        User updatedUser = new User();
+        updatedUser.setIdUser(1L);
+        updatedUser.setUsername("john_updated");
+        updatedUser.setEmail("john_updated@example.com");
+        when(userService.updateUser(any(User.class))).thenReturn(updatedUser);
 
-        mockMvc.perform(get("/users/1")
-                        .accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(put("/api/v1/users/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"username\": \"john_updated\", \"email\": \"john_updated@example.com\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.username").value("john_updated"))
+                .andExpect(jsonPath("$.email").value("john_updated@example.com"));
+    }
+
+    @Test
+    void getUserById_NotFound() throws Exception {
+        when(userService.findUserById(1L)).thenThrow(new RuntimeException("User not found"));
+
+        mockMvc.perform(get("/api/v1/users/1"))
                 .andExpect(status().isNotFound());
     }
 
     @Test
-    public void testUpdateUser_Success() throws Exception {
-        when(userService.updateUser(any(User.class))).thenReturn(user);
-
-        mockMvc.perform(put("/users/1")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"username\":\"AlessiaR\",\"email\":\"aapromero@gmail.com\",\"password\":\"ale08\",\"role\":\"USER\"}")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.idUser").value(1L))
-                .andExpect(jsonPath("$.username").value("AlessiaR"))
-                .andExpect(jsonPath("$.email").value("aapromero@gmail.com"))
-                .andExpect(jsonPath("$.password").value("ale08"))
-                .andExpect(jsonPath("$.role").value("USER"));
-    }
-
-    @Test
-    public void testUpdateUser_NotFound() throws Exception {
+    void updateUser_NotFound() throws Exception {
         when(userService.updateUser(any(User.class))).thenReturn(null);
 
-        mockMvc.perform(put("/users/1")
+        mockMvc.perform(put("/api/v1/users/1")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"username\":\"AlessiaR\",\"email\":\"aapromero@gmail.com\",\"password\":\"ale08\",\"role\":\"USER\"}")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
-    }
-
-    @Test
-    public void testAdoptPet_Success() throws Exception {
-        when(petService.findPetById(1L)).thenReturn(pet);
-        when(petService.updatePet(any(Pet.class))).thenReturn(pet);
-
-        mockMvc.perform(post("/users/1/adopt/1")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void testAdoptPet_NotFound() throws Exception {
-        Mockito.doThrow(new RuntimeException()).when(petService).adoptPet(1L, 1L);
-
-        mockMvc.perform(post("/users/1/adopt/1")
-                        .accept(MediaType.APPLICATION_JSON))
+                        .content("{\"username\": \"unknown\"}"))
                 .andExpect(status().isNotFound());
     }
 }

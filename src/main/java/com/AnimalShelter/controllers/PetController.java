@@ -1,5 +1,6 @@
 package com.AnimalShelter.controllers;
 
+
 import com.AnimalShelter.models.Pet;
 import com.AnimalShelter.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,17 +9,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/pet")
-@CrossOrigin(origins = "*")
-
+@RequestMapping("/api/v1/pets")
 public class PetController {
+
     @Autowired
-    PetService petService;
+    private PetService petService;
 
     @GetMapping("/{idPet}")
-    public ResponseEntity<Pet> findPetById(@PathVariable Long idPet) {
-        Pet pet = petService.findPetById(idPet);
-        return new ResponseEntity<>(pet, HttpStatus.OK);
+    public ResponseEntity<Pet> getPetById(@PathVariable Long idPet) {
+        try {
+            Pet pet = petService.findPetById(idPet);
+            return new ResponseEntity<>(pet, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/{idPet}")
@@ -28,9 +32,13 @@ public class PetController {
         return new ResponseEntity<>(updatedPet, HttpStatus.OK);
     }
 
-    @PostMapping("/{idPet}/adopt")
-    public ResponseEntity<Void> adoptPet(@PathVariable Long idPet, @RequestParam Long idUser) {
-        petService.adoptPet(idPet, idUser);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @PostMapping("/{idPet}/adopt/{idUser}")
+    public ResponseEntity<Void> adoptPet(@PathVariable Long idPet, @PathVariable Long idUser) {
+        try {
+            petService.adoptPet(idPet, idUser);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
