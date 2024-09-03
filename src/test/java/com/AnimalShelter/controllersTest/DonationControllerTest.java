@@ -12,11 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import java.util.Collections;
-import java.lang.String;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-class DonationControllerTest {
+public class DonationControllerTest {
 
     private MockMvc mockMvc;
 
@@ -40,9 +39,7 @@ class DonationControllerTest {
     void setUp() {
         openMocks(this);
 
-        // Configura MockMvc para el controlador con mocks
         mockMvc = MockMvcBuilders.standaloneSetup(donationController).build();
-
     }
     @Test
     public void testGetAllDonation() throws Exception {
@@ -54,13 +51,14 @@ class DonationControllerTest {
 
         when(donationService.getAllDonation()).thenReturn(Collections.singletonList(donation));
 
-        mockMvc.perform(get("/donations")
+        mockMvc.perform(get("/api/v1/donations")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].name").value("Donation for food"))
                 .andExpect(jsonPath("$[0].amount").value("100"));
     }
+
     @Test
     public void testGetDonationById() throws Exception{
 
@@ -75,10 +73,6 @@ class DonationControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(donation, response.getBody());
     }
-
-    }
-
-
-
-
 }
+
+

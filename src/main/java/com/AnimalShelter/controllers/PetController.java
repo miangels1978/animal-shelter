@@ -16,11 +16,11 @@ public class PetController {
     @Autowired
     PetService petService;
 
-    @GetMapping(path = "")
+    @GetMapping(path = "/availablePets")
         public List<Pet> getAllAvailablePets() {
         return petService.getAllAvailablePets();
     }
-    @GetMapping(path = "")
+    @GetMapping(path = "/adoptedPets")
     public List<Pet> getAllAdoptedPets(){
         return petService.getAllAdoptedPets();
     }
@@ -28,7 +28,7 @@ public class PetController {
     public List<Pet> getAllPets(){
         return petService.getAllPets();
     }
-    @GetMapping(path = "/Pet/{id}")
+    @GetMapping(path = "/pet/{id}")
     public Optional<Pet> getPetById(@PathVariable long id){
         return petService.getPetById(id);
     }

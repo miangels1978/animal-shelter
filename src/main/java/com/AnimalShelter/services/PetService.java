@@ -22,36 +22,6 @@ public class PetService {
         return iPetRepository.findByIsAdoptedTrue();
     }
 
-//    public List<Pet> getAllAvailablePets() {
-//        return iPetRepository.findAll()
-//                .stream()
-//                .filter(pet -> !pet.getIsAdopted())
-//                .collect(Collectors.toList());
-//    }
-//
-//    public List<Pet> getAllAdoptedPets() {
-//        return iPetRepository.findAll()
-//                .stream()
-//                .filter(pet -> !pet.getIsAdopted())
-//                .collect(Collectors.toList());
-//    }
-
-//    public List<Pet> getAllAvailablePets(){
-//        try{
-//            return iPetRepository.findAll();
-//        } catch (Exception e){
-//            throw new RuntimeException("Error retrieving all available pets.", e);
-//        }
-//    }
-//
-//    public List<Pet> getAllAdoptedPets() {
-//        try{
-//            return iPetRepository.findAll();
-//        } catch (Exception e){
-//            throw new RuntimeException("Error retrieving all adopted pets.", e);
-//        }
-//    }
-
     public List<Pet> getAllPets(){
         try{
             return (List<Pet>) iPetRepository.findAll();
@@ -68,5 +38,17 @@ public class PetService {
         }
     }
 }
-
+//    public List<Pet> getAllAvailablePets() {
+//        return iPetRepository.findAll()
+//                .stream()
+//                .filter(pet -> !pet.getAdopted())
+//                .collect(Collectors.toList());
+//    }
+//
+//    public List<Pet> getAllAdoptedPets() {
+//        return iPetRepository.findAll()
+//                .stream()
+//                .filter(pet -> !pet.getAdopted())
+//                .collect(Collectors.toList());
+//    }
 
