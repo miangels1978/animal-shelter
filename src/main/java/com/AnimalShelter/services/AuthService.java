@@ -1,4 +1,4 @@
-package com.AnimalShelter.services;
+/*package com.AnimalShelter.services;
 
 import com.AnimalShelter.dtos.request.LoginRequest;
 import com.AnimalShelter.dtos.request.RegisterRequest;
@@ -53,4 +53,4 @@ public class AuthService {
                 .role(register.getRole())
                 .build();
     }
-}
+}*/
