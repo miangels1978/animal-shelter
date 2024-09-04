@@ -14,7 +14,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // Endpoint para obtener un usuario por ID
     @GetMapping("/{idUser}")
     public ResponseEntity<User> getUserById(@PathVariable Long idUser) {
         try {
@@ -25,8 +24,7 @@ public class UserController {
         }
     }
 
-    // Endpoint para actualizar los detalles de un usuario
-    @PutMapping("/{idUser}")
+    @PutMapping("/update/{idUser}")
     public ResponseEntity<User> updateUser(@PathVariable Long idUser, @RequestBody User user) {
         user.setIdUser(idUser);
         User updatedUser = userService.updateUser(user);

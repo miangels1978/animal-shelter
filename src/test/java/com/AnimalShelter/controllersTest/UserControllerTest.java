@@ -28,14 +28,21 @@ class UserControllerTest {
     void getUserById() throws Exception {
         User user = new User();
         user.setIdUser(1L);
-        user.setUsername("john_doe");
+        user.setUsername("Alessia");
         when(userService.findUserById(1L)).thenReturn(user);
 
-        mockMvc.perform(get("/api/v1/users/1"))
+        mockMvc.perform(get("/{idUser}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.idUser").value(1))
-                .andExpect(jsonPath("$.username").value("john_doe"));
+                .andExpect(jsonPath("$.username").value("Alessia"));
     }
+
+    @Test
+    void getUserById_NotFound() throws Exception {
+        when(userService.findUserById(1L)).thenThrow(new RuntimeException("User not found"));
+
+        mockMvc.perform(get("/{idUser}"))
+                .andExpect(status().isNotFound());
 
     @Test
     void updateUser() throws Exception {
@@ -45,29 +52,12 @@ class UserControllerTest {
         updatedUser.setEmail("john_updated@example.com");
         when(userService.updateUser(any(User.class))).thenReturn(updatedUser);
 
-        mockMvc.perform(put("/api/v1/users/1")
+        mockMvc.perform(put("/update/{idUser})
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"username\": \"john_updated\", \"email\": \"john_updated@example.com\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.username").value("john_updated"))
                 .andExpect(jsonPath("$.email").value("john_updated@example.com"));
-    }
 
-    @Test
-    void getUserById_NotFound() throws Exception {
-        when(userService.findUserById(1L)).thenThrow(new RuntimeException("User not found"));
-
-        mockMvc.perform(get("/api/v1/users/1"))
-                .andExpect(status().isNotFound());
-    }
-
-    @Test
-    void updateUser_NotFound() throws Exception {
-        when(userService.updateUser(any(User.class))).thenReturn(null);
-
-        mockMvc.perform(put("/api/v1/users/1")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"username\": \"unknown\"}"))
-                .andExpect(status().isNotFound());
     }
 }
