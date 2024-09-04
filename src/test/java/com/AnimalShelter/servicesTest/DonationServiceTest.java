@@ -43,8 +43,8 @@ public class DonationServiceTest {
     void testGetAllDonation() {
 
         List<Donation> donations = new ArrayList<>();
-        donations.add(new Donation(1L, 100, "John Doe", null));
-        donations.add(new Donation(2L, 200, "Jane Smith", null));
+        donations.add(new Donation(1L, 100.0d, "John Doe", null));
+        donations.add(new Donation(2L, 200.0d, "Jane Smith", null));
 
         when(iDonationRepository.findAll()).thenReturn(donations);
 
@@ -57,13 +57,36 @@ public class DonationServiceTest {
     @Test
     void testGetDonationById() {
 
-        Donation donation = new Donation(1L, 100, "John Doe", null);
+        Donation donation = new Donation(1L, 100.0d, "John Doe", null);
         when(iDonationRepository.findById(1L)).thenReturn(Optional.of(donation));
 
         Optional<Donation> result = donationService.getDonationById(1L);
 
         assertEquals(Optional.of(donation), result);
         verify(iDonationRepository, times(1)).findById(1L);
+    }
+
+    @Test
+    public void testCreateDonation() {
+
+        Donation donationToSave = new Donation();
+        Long id = 1L;
+        String name = "Miguel Angel";
+        double amount = 250.0d;
+
+        donationToSave.setId(id);
+        donationToSave.setName(name);
+        donationToSave.setAmount(amount);
+
+        when(iDonationRepository.save(donationToSave)).thenReturn(donationToSave);
+
+        Donation result = donationService.createDonation(donationToSave);
+
+        assertEquals(1L, result.getId());
+        assertEquals("Miguel Angel", result.getName());
+        assertEquals(250.0d, result.getAmount());
+
+        verify(iDonationRepository, times(1)).save(donationToSave);
     }
 }
 

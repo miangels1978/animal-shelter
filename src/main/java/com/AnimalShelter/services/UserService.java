@@ -28,4 +28,7 @@ public class UserService {
             throw new RuntimeException("Error retrieving all user by id", e);
         }
     }
+    public User createUser(User user) {
+        return iUserRepository.save(user);
+    }
 }

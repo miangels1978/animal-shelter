@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/api/v1/users")
 @CrossOrigin(origins = "*")
@@ -25,5 +26,8 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        return userService.createUser(user);
+    }
 }

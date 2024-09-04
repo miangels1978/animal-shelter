@@ -22,10 +22,7 @@ public class Donation {
     @Column
     private long id;
 
-    @Column
-    private double donation;
-
-    @Column
+    private Double amount;
     private String name;
 
     @ManyToOne

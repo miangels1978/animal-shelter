@@ -37,6 +37,8 @@ public class PetService {
             throw new RuntimeException("Error retrieving pet by id.", e);
         }
     }
+    public Pet addNewPet(Pet pet) { return iPetRepository.save(pet);}
+
 }
 
 
