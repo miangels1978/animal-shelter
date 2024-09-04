@@ -6,6 +6,7 @@ import com.AnimalShelter.models.User;
 import com.AnimalShelter.repositories.IDonationRepository;
 import com.AnimalShelter.services.DonationService;
 //import com.AnimalShelter.services.JwtService;
+import com.AnimalShelter.services.JwtService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,6 +46,8 @@ public class DonationControllerTest {
     @MockBean
     private DonationService donationService;
     private ObjectMapper objectMapper;
+    @MockBean
+    private JwtService jwtService;
 
     @BeforeEach
     public void setup() {

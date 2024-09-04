@@ -5,6 +5,7 @@ import com.AnimalShelter.controllers.PetController;
 import com.AnimalShelter.models.Donation;
 import com.AnimalShelter.models.Pet;
 import com.AnimalShelter.services.DonationService;
+import com.AnimalShelter.services.JwtService;
 import com.AnimalShelter.services.PetService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(PetController.class)
 @ExtendWith(MockitoExtension.class)
-public class PetContrllerTest {
+public class PetControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -39,6 +40,8 @@ public class PetContrllerTest {
     @MockBean
     private PetService petService;
     private ObjectMapper objectMapper;
+    @MockBean
+    private JwtService jwtService;
 
     @BeforeEach
     public void setup() {

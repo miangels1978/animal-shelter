@@ -20,13 +20,10 @@ public class Donation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column
-    private long idDonation;
+    private long id;
 
     @Column
-    private String name;
-
-    @Column
-    private double amount;
+    private double donation;
 
     @ManyToOne
     @JoinColumn (name = "idUser", nullable = false)

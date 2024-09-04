@@ -19,7 +19,7 @@ public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(name = "id pet")
+    @Column(name = "idPet")
     private Long idPet;
 
     @Column(name = "name")
@@ -38,7 +38,7 @@ public class Pet {
     private String description;
 
     @Column(name = "isAdopted")
-    private String isAdopted;
+    private boolean isAdopted;
 
     @Column(name = "url")
     private String url;
