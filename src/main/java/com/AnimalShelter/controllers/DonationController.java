@@ -18,10 +18,10 @@ public class DonationController {
     @Autowired
     DonationService donationService;
 
-    @GetMapping
-    public List<Donation> getAllDonation(){
-        return donationService.getAllDonation();
-    }
+//    @GetMapping
+//    public List<Donation> getAllDonation(){
+//        return donationService.getAllDonation();
+//    }
     @GetMapping ("/{id}")
     public ResponseEntity<Donation> getDonationById(@PathVariable long id){
         return donationService.getDonationById(id)
