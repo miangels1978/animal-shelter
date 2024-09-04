@@ -20,20 +20,6 @@ public class DonationService {
     public Optional<Donation> getDonationById(long id){
             return iDonationRepository.findById(id);
     }
-//    public List<Donation> getTopDonor() {
-//            return iDonationRepository.findAll();
-//
-//    }
-
-//    public ArrayList<Map<User, Integer>> getTopDonor(User user){
-//
-//        //usuario, cantidad de donaciones total
-//
-//
-//        ArrayList<map> list = new ArrayList<>(map.value);
-//
-//        list.stream().sorted();}
-
 
     }
 

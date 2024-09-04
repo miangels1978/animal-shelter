@@ -38,17 +38,5 @@ public class PetService {
         }
     }
 }
-//    public List<Pet> getAllAvailablePets() {
-//        return iPetRepository.findAll()
-//                .stream()
-//                .filter(pet -> !pet.getAdopted())
-//                .collect(Collectors.toList());
-//    }
-//
-//    public List<Pet> getAllAdoptedPets() {
-//        return iPetRepository.findAll()
-//                .stream()
-//                .filter(pet -> !pet.getAdopted())
-//                .collect(Collectors.toList());
-//    }
+
 

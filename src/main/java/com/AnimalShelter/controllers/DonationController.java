@@ -29,18 +29,4 @@ public class DonationController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-//    @GetMapping(path = "")
-//    public List<Donation> getTopDonor(){
-//        return donationService.getTopDonor();
-//    }
-//    @GetMapping(path = "")
-//    public List<User> getTotalAmountDonatedByUser(){
-//        return donationService.getTotalAmountDonatedByUser();
-//    }
-//
-//    @GetMapping("")
-//    public List<User> getUserWithMostDonations() {
-//        return donationService.getUserWithMostDonations();
-//    }
-
 }
