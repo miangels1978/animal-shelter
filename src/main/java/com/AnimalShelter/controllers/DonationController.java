@@ -12,7 +12,7 @@ public class DonationController {
     @Autowired
     DonationService donationService;
 
-    @PostMapping(path = "/donations")
+    @PostMapping
     public Donation createDonation(@RequestBody Donation donation) {
         return donationService.createDonation(donation);
     }
