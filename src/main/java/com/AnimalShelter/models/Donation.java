@@ -25,6 +25,9 @@ public class Donation {
     @Column
     private double donation;
 
+    @Column
+    private String name;
+
     @ManyToOne
     @JoinColumn (name = "idUser", nullable = false)
     @JsonBackReference

@@ -51,6 +51,7 @@ public class DonationControllerTest {
 
         mockMvc = MockMvcBuilders.standaloneSetup(donationController).build();
     }
+
     @Test
     public void testGetAllDonation() throws Exception {
 
@@ -70,7 +71,7 @@ public class DonationControllerTest {
     }
 
     @Test
-    public void testGetDonationById() throws Exception{
+    public void testGetDonationById() throws Exception {
 
         long id = 1L;
         Donation donation = new Donation();

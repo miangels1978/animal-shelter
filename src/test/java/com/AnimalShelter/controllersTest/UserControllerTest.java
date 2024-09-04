@@ -36,7 +36,7 @@ public class UserControllerTest {
     private UserController userController;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 
@@ -62,6 +62,7 @@ public class UserControllerTest {
         assertEquals("John", result.get(0).getUsername());
         assertEquals("Jane", result.get(1).getUsername());
     }
+
     @Test
     public void testGetUserById() {
 
@@ -78,5 +79,3 @@ public class UserControllerTest {
         assertEquals("John", result.get().getUsername());
     }
 }
-
-

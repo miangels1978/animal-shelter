@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -42,8 +43,8 @@ public class DonationServiceTest {
     void testGetAllDonation() {
 
         List<Donation> donations = new ArrayList<>();
-        donations.add(new Donation(1L, "John Doe", "100", null));
-        donations.add(new Donation(2L, "Jane Smith", "200", null));
+        donations.add(new Donation(1L, 100, "John Doe", null));
+        donations.add(new Donation(2L, 200, "Jane Smith", null));
 
         when(iDonationRepository.findAll()).thenReturn(donations);
 
@@ -56,7 +57,7 @@ public class DonationServiceTest {
     @Test
     void testGetDonationById() {
 
-        Donation donation = new Donation(1L, "John Doe", "100", null);
+        Donation donation = new Donation(1L, 100, "John Doe", null);
         when(iDonationRepository.findById(1L)).thenReturn(Optional.of(donation));
 
         Optional<Donation> result = donationService.getDonationById(1L);
