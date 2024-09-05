@@ -1,5 +1,6 @@
 package com.AnimalShelter.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class User implements UserDetails {
     @Id
     @Column
@@ -32,21 +34,39 @@ public class User implements UserDetails {
     @Column
     private String password;
 
-
     @Enumerated(EnumType.STRING)
     private ERole role;
 
-    @OneToMany (mappedBy = "user")
-    @JsonManagedReference ("user")
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference("user")
     private List<Donation> donationList;
 
-    @OneToMany (mappedBy = "user")
-    @JsonManagedReference ("user")
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference("user")
     private List<Pet> petList;
 
     @Override
-       public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of (new SimpleGrantedAuthority (role.name ()));
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+}

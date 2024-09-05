@@ -19,7 +19,7 @@ public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(name = "idPet")
+    @Column(name = "id pet")
     private Long idPet;
 
     @Column(name = "name")
@@ -37,14 +37,14 @@ public class Pet {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "isAdopted")
-    private boolean isAdopted;
+    @Column(name = "isadopted")
+    private boolean isadopted;
 
     @Column(name = "url")
     private String url;
 
     @ManyToOne
-    @JoinColumn (name = "idUser", nullable = false)
+    @JoinColumn(name = "idUser", nullable = false)
     @JsonBackReference
     private User user;
 }

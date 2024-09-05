@@ -23,10 +23,13 @@ public class Donation {
     private long id;
 
     @Column
-    private double donation;
+    private Double amount;
+
+    @Column
+    private String name;
 
     @ManyToOne
-    @JoinColumn (name = "idUser", nullable = false)
+    @JoinColumn(name = "idUser", nullable = false)
     @JsonBackReference
     private User user;
 }
