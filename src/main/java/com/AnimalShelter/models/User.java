@@ -23,7 +23,6 @@ public class User implements UserDetails {
     @Column
     @GeneratedValue
     private Long idUser;
-    @Basic
 
     @Column(nullable = false)
     private String username;
@@ -38,11 +37,11 @@ public class User implements UserDetails {
     private ERole role;
 
     @OneToMany(mappedBy = "user")
-    @JsonManagedReference("user")
+    @JsonManagedReference
     private List<Donation> donationList;
 
     @OneToMany(mappedBy = "user")
-    @JsonManagedReference("user")
+    @JsonManagedReference
     private List<Pet> petList;
 
     @Override

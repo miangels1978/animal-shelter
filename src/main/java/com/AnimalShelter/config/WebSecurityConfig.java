@@ -30,7 +30,7 @@ public class WebSecurityConfig {
                                 .requestMatchers("/api/test/all").permitAll()
                                 .requestMatchers("/api/test/user").hasAnyAuthority("ADMIN", "USER")
                                 .requestMatchers("/api/test/admin").hasAuthority("ADMIN")
-                                .requestMatchers("/api/v1/pets/newPets").hasAuthority("ADMIN")
+                                .requestMatchers("/api/v1/newPost").hasAuthority("ADMIN")
                                 .requestMatchers("/api/v1/post/delete/**").hasAuthority("ADMIN")
                                 .requestMatchers("/api/v1/post/update/**").hasAuthority("ADMIN")
                                 .requestMatchers("/api/v1/post/getAll").permitAll()
