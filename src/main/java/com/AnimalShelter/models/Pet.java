@@ -13,13 +13,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Table(name = "Pet")
+@Table(name = "pet")
 
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name = "id pet")
+    @Column(name = "id_pet")
     private Long idPet;
 
     @Column(name = "name")
@@ -37,14 +36,14 @@ public class Pet {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "isadopted")
-    private boolean isadopted;
+    @Column(name = "is_adopted")
+    private Boolean isAdopted;
 
     @Column(name = "url")
     private String url;
 
     @ManyToOne
-    @JoinColumn(name = "idUser", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private User user;
 }

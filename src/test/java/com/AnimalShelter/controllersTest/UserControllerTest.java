@@ -4,6 +4,7 @@ import com.AnimalShelter.controllers.UserController;
 import com.AnimalShelter.models.User;
 import com.AnimalShelter.models.ERole;
 import com.AnimalShelter.services.JwtService;
+import com.AnimalShelter.models.User;
 import com.AnimalShelter.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,14 +13,20 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -27,6 +34,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(UserController.class)
 @ExtendWith(MockitoExtension.class)
@@ -114,5 +126,42 @@ public class UserControllerTest {
                 .andExpect(status().isOk());
 
         verify(userService).deleteAllUsers();
+    }
+
+    @Test
+    void getUserById_NotFound() throws Exception {
+        when(userService.findUserById(1L)).thenThrow(new RuntimeException("User not found"));
+
+        mockMvc.perform(get("/{idUser}"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void updateUser() throws Exception {
+        User updatedUser = new User();
+        updatedUser.setIdUser(1L);
+        updatedUser.setUsername("john_updated");
+        updatedUser.setEmail("john_updated@example.com");
+        when(userService.updateUser(any(User.class))).thenReturn(updatedUser);
+
+        ResponseEntity<User> response = userController.updateUser(1L, updatedUser);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("john_updated", response.getBody().getUsername());
+        assertEquals("john_updated@example.com", response.getBody().getEmail());
+        verify(userService, times(1)).updateUser(any(User.class));
+    }
+
+    @Test
+    public void updateUser_NotFound() throws Exception {
+        when(userService.updateUser(any(User.class))).thenReturn(null);
+
+        User updatedUser = new User();
+        updatedUser.setIdUser(1L);
+        ResponseEntity<User> response = userController.updateUser(1L, updatedUser);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+
+        verify(userService, times(1)).updateUser(any(User.class));
     }
 }

@@ -24,6 +24,9 @@ import java.util.List;
 import java.util.Optional;
 
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -35,9 +38,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.mockito.Mockito.when;
-
-
 @AutoConfigureMockMvc
 
 @WebMvcTest(PetController.class)
@@ -71,7 +75,7 @@ public class PetControllerTest {
         pet.setAge(5);
         pet.setGender("Male");
         pet.setDescription("Ejemplar");
-        pet.setIsadopted(false);
+        pet.setIsAdopted(false);
         pet.setUrl("http://example.com/balud.jpg");
 
         when(petService.addNewPet(any(Pet.class))).thenReturn(pet);
@@ -102,6 +106,7 @@ public class PetControllerTest {
         verify(petService, times(1)).getAllAdoptedPets();
     }
 
+
     @Test
     void testGetAllPets() {
         List<Pet> pets = new ArrayList<>();
@@ -111,7 +116,6 @@ public class PetControllerTest {
         assertEquals(pets, result);
         verify(petService, times(1)).getAllPets();
     }
-
     @Test
     void testGetPetById() {
         Pet pet = new Pet();
@@ -142,4 +146,21 @@ public class PetControllerTest {
 
         verify(petService).deleteAllPets();
     }
+    @Test
+    public void updatePet() throws Exception {
+        Pet updatedPet = new Pet();
+        updatedPet.setIdPet(1L);
+        updatedPet.setName("Updated Pet");
+        when(petService.updatePet(any(Pet.class))).thenReturn(updatedPet);
+
+        ResponseEntity<Pet> response = petController.updatePet(1L, updatedPet);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Updated Pet", response.getBody().getName());
+        verify(petService, times(1)).updatePet(any(Pet.class));
+    }
+
 }
+
+
+

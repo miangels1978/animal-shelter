@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api/v1/users")
 @CrossOrigin(origins = "*")
@@ -50,4 +49,16 @@ public class UserController {
         userService.deleteAllUsers();
     }
 
+
+
+    @PutMapping("/update/{idUser}")
+    public ResponseEntity<User> updateUser(@PathVariable Long idUser, @RequestBody User user) {
+        user.setIdUser(idUser);
+        User updatedUser = userService.updateUser(user);
+        if (updatedUser != null) {
+            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

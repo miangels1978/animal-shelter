@@ -18,20 +18,22 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 
+@Table (name = "User")
+
 public class User implements UserDetails {
     @Id
-    @Column
-    @GeneratedValue
-    private Long idUser;
-    @Basic
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(nullable = false)
+    @Column(name = "idUser")
+    private Long idUser;
+
+    @Column(name = "username")
     private String username;
 
-    @Column
+    @Column(name = "email")
     private String email;
 
-    @Column
+    @Column(name = "password")
     private String password;
 
     @Enumerated(EnumType.STRING)
