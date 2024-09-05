@@ -19,7 +19,7 @@ public class PetController {
     @Autowired
     PetService petService;
 
-    @PostMapping
+    @PostMapping (path = "/newPets")
     public Pet addNewPet(@RequestBody Pet pet) {
         return petService.addNewPet(pet);
     }
