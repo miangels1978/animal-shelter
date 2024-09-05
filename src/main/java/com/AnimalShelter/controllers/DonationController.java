@@ -29,7 +29,7 @@ public class DonationController {
         return donationService.getAllDonation();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/donation/{id}")
     public ResponseEntity<Donation> getDonationById(@PathVariable long id) {
         return donationService.getDonationById(id)
                 .map(ResponseEntity::ok)

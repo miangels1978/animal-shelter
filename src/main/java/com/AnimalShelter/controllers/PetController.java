@@ -44,7 +44,7 @@ public class PetController {
         return petService.getPetById(id);
     }
 
-    @DeleteMapping(path = "pet/{id}")
+    @DeleteMapping(path = "/pet/{id}")
     public ResponseEntity<String> deletePetById(@PathVariable Long id) {
         Optional<Pet> pet = petService.getPetById(id);
         if (pet.isPresent()) {
