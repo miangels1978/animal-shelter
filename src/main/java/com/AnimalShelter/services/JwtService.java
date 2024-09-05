@@ -39,6 +39,11 @@ public class JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+//    private Key getKey() {
+//        byte[] keyBytes = java.util.Base64.getDecoder().decode(SECRET_KEY);
+//        return Keys.hmacShaKeyFor(keyBytes);
+//    }
+
 
     public String getUsernameFromToken(String token) {
 
