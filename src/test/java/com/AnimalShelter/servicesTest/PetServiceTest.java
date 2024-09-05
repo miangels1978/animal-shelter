@@ -62,23 +62,23 @@ public class PetServiceTest {
     @Test
     void testGetAllAvailablePets() {
         List<Pet> availablePets = new ArrayList<>();
-        when(iPetRepository.findByIsAdoptedFalse()).thenReturn(availablePets);
+        when(iPetRepository.findByIsadoptedFalse()).thenReturn(availablePets);
 
         List<Pet> result = petService.getAllAvailablePets();
 
         assertEquals(availablePets, result);
-        verify(iPetRepository, times(1)).findByIsAdoptedFalse();
+        verify(iPetRepository, times(1)).findByIsadoptedFalse();
     }
 
     @Test
     void testGetAllAdoptedPets() {
         List<Pet> adoptedPets = new ArrayList<>();
-        when(iPetRepository.findByIsAdoptedTrue()).thenReturn(adoptedPets);
+        when(iPetRepository.findByIsadoptedTrue()).thenReturn(adoptedPets);
 
         List<Pet> result = petService.getAllAdoptedPets();
 
         assertEquals(adoptedPets, result);
-        verify(iPetRepository, times(1)).findByIsAdoptedTrue();
+        verify(iPetRepository, times(1)).findByIsadoptedTrue();
     }
 
     @Test

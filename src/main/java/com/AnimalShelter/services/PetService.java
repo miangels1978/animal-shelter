@@ -19,11 +19,11 @@ public class PetService {
     }
 
     public List<Pet> getAllAvailablePets() {
-        return iPetRepository.findByIsAdoptedFalse();
+        return iPetRepository.findByIsadoptedFalse();
     }
 
     public List<Pet> getAllAdoptedPets() {
-        return iPetRepository.findByIsAdoptedTrue();
+        return iPetRepository.findByIsadoptedTrue();
     }
 
     public List<Pet> getAllPets() {
