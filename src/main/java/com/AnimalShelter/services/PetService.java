@@ -49,5 +49,19 @@ public class PetService {
     public void deleteAllPets() {
         iPetRepository.deleteAll();
     }
+    public Pet findPetById(Long idPet) {
+        return iPetRepository.findById(idPet).orElseThrow();
+    }
 
+    public Pet updatePet(Pet pet) {
+        Pet existingPet = findPetById(pet.getIdPet());
+        existingPet.setName(pet.getName());
+        existingPet.setSpecies(pet.getSpecies());
+        existingPet.setAge(pet.getAge());
+        existingPet.setGender(pet.getGender());
+        existingPet.setDescription(pet.getDescription());
+        existingPet.setIsadopted(pet.isIsadopted ());
+        existingPet.setUrl(pet.getUrl());
+        return iPetRepository.save(existingPet);
+    }
 }
