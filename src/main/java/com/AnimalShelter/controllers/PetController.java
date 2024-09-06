@@ -59,4 +59,14 @@ public class PetController {
     public void deleteAllPets() {
         petService.deleteAllPets();
     }
+
+    @PutMapping("/{idPet}")
+    public ResponseEntity<Pet> updatePet(@PathVariable Long idPet, @RequestBody Pet pet) {
+        pet.setIdPet(idPet);
+        Pet updatedPet = petService.updatePet(pet);
+        return new ResponseEntity<>(updatedPet, HttpStatus.OK);
+    }
 }
+
+
+

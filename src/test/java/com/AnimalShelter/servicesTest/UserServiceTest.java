@@ -10,6 +10,7 @@ import lombok.var;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -17,12 +18,20 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Collections;
 import java.util.Optional;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
+
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
+
+@RunWith(MockitoJUnitRunner.class)
+@SpringBootTest
+
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -110,5 +119,39 @@ public class UserServiceTest {
 
         verify(iUserRepository).deleteAll();
 
+    }
+    @org.junit.Test
+    public void testUpdateUser() {
+        // Given
+        User user = new User();
+        user.setIdUser(1L);
+        user.setUsername("Rombelli");
+        user.setEmail("romerobellisamar@gmail.com");
+        user.setPassword("Password");
+        user.setRole(ERole.valueOf("ADMIN"));
+
+        User updatedUser = new User();
+        updatedUser.setIdUser(1L);
+        updatedUser.setUsername("Rombelli");
+        updatedUser.setEmail("romerobellisamar@gmail.com");
+        updatedUser.setPassword("Password24");
+        updatedUser.setRole(ERole.valueOf("ADMIN"));
+
+        when(iUserRepository.findById(1L)).thenReturn(java.util.Optional.of(user));
+        when(iUserRepository.save(any(User.class))).thenReturn(updatedUser);
+
+        // When
+        User result = userService.updateUser(updatedUser);
+
+        // Then
+        assertNotNull(result);
+        assertEquals(updatedUser.getIdUser(), result.getIdUser());
+        assertEquals(updatedUser.getUsername(), result.getUsername());
+        assertEquals(updatedUser.getEmail(), result.getEmail());
+        assertEquals(updatedUser.getPassword(), result.getPassword());
+        assertEquals(updatedUser.getRole(), result.getRole());
+
+        verify(iUserRepository, times(1)).findById(1L);
+        verify(iUserRepository, times(1)).save(any(User.class));
     }
 }
