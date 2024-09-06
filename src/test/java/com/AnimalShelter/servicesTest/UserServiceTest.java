@@ -6,6 +6,7 @@ import com.AnimalShelter.models.User;
 import com.AnimalShelter.repositories.IPetRepository;
 import com.AnimalShelter.repositories.IUserRepository;
 import com.AnimalShelter.services.UserService;
+import lombok.var;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.BeforeEach;
