@@ -19,7 +19,7 @@ public class PetController {
     @Autowired
     PetService petService;
 
-    @PostMapping
+    @PostMapping (path = "/newPets")
     public Pet addNewPet(@RequestBody Pet pet) {
         return petService.addNewPet(pet);
     }
@@ -34,7 +34,7 @@ public class PetController {
         return petService.getAllAdoptedPets();
     }
 
-    @GetMapping(path = "")
+    @GetMapping(path = "/getAll")
     public List<Pet> getAllPets() {
         return petService.getAllPets();
     }
@@ -44,7 +44,7 @@ public class PetController {
         return petService.getPetById(id);
     }
 
-    @DeleteMapping(path = "pet/{id}")
+    @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity<String> deletePetById(@PathVariable Long id) {
         Optional<Pet> pet = petService.getPetById(id);
         if (pet.isPresent()) {

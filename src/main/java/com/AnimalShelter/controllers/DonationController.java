@@ -19,24 +19,24 @@ public class DonationController {
     DonationService donationService;
 
 
-    @PostMapping
+    @PostMapping (path = "/createDonation")
     public Donation createDonation(@RequestBody Donation donation) {
         return donationService.createDonation(donation);
     }
 
-    @GetMapping
+    @GetMapping (path = "/getAll")
     public List<Donation> getAllDonation() {
         return donationService.getAllDonation();
     }
 
-    @GetMapping("/donation/{id}")
+    @GetMapping("/getDonation/{id}")
     public ResponseEntity<Donation> getDonationById(@PathVariable long id) {
         return donationService.getDonationById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping(path = "/donation/{id}")
+    @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity<String> deleteDonationById(@PathVariable Long id) {
         Optional<Donation> donation = donationService.getDonationById(id);
         if (donation.isPresent()) {
@@ -47,7 +47,7 @@ public class DonationController {
         }
     }
 
-    @DeleteMapping
+    @DeleteMapping (path = "/deleteAll")
     public void deleteAllDonations() {
         donationService.deleteAllDonations();
     }
