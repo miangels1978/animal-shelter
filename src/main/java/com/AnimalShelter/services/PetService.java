@@ -69,7 +69,7 @@ public class PetService {
         existingPet.setAge(pet.getAge());
         existingPet.setGender(pet.getGender());
         existingPet.setDescription(pet.getDescription());
-        existingPet.setIsAdopted(pet.getIsAdopted());
+        existingPet.setIsadopted(pet.getIsadopted());
         existingPet.setUrl(pet.getUrl());
         return iPetRepository.save(existingPet);
     }

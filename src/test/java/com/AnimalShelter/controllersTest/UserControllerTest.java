@@ -132,7 +132,7 @@ public class UserControllerTest {
     void getUserById_NotFound() throws Exception {
         when(userService.findUserById(1L)).thenThrow(new RuntimeException("User not found"));
 
-        mockMvc.perform(get("/{idUser}"))
+        mockMvc.perform(get("/api/v1/users/{idUser}", 1L))
                 .andExpect(status().isNotFound());
     }
 

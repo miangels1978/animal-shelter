@@ -55,7 +55,7 @@ public class PetServiceTest {
         pet.setAge(5);
         pet.setGender("Male");
         pet.setDescription("Ejemplar");
-        pet.setIsAdopted(false);
+        pet.setIsadopted(false);
         pet.setUrl("http://example.com/balud.jpg");
         when(iPetRepository.save(any(Pet.class))).thenReturn(pet);
 
@@ -67,7 +67,7 @@ public class PetServiceTest {
         assertEquals(5, result.getAge());
         assertEquals("Male", result.getGender());
         assertEquals("Ejemplar", result.getDescription());
-        assertEquals(false, result.getIsAdopted());
+        assertEquals(false, result.getIsadopted());
         assertEquals("http://example.com/balud.jpg", result.getUrl());
     }
 

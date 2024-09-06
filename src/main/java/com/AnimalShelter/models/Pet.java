@@ -37,7 +37,7 @@ public class Pet {
     private String description;
 
     @Column(name = "is_adopted")
-    private Boolean isAdopted;
+    private Boolean isadopted;
 
     @Column(name = "url")
     private String url;

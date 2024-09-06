@@ -75,7 +75,7 @@ public class PetControllerTest {
         pet.setAge(5);
         pet.setGender("Male");
         pet.setDescription("Ejemplar");
-        pet.setIsAdopted(false);
+        pet.setIsadopted(false);
         pet.setUrl("http://example.com/balud.jpg");
 
         when(petService.addNewPet(any(Pet.class))).thenReturn(pet);
