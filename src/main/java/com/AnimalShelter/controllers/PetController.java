@@ -39,7 +39,7 @@ public class PetController {
         return petService.getAllPets();
     }
 
-    @GetMapping(path = "/pet/{id}")
+    @GetMapping(path = "/petId/{id}")
     public Optional<Pet> getPetById(@PathVariable long id) {
         return petService.getPetById(id);
     }

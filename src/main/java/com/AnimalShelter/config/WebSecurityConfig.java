@@ -36,7 +36,7 @@ public class WebSecurityConfig {
                                 .requestMatchers("/api/v1/pets/getAll").permitAll()
                                 .requestMatchers("/api/v1/pets/availablePets").permitAll()
                                 .requestMatchers("/api/v1/pets/adoptedPets").permitAll()
-                                .requestMatchers("/api/v1/pets/pet/**").permitAll()
+                                .requestMatchers("/api/v1/pets/petId/**").permitAll()
                                 .requestMatchers("/api/v1/donations/createDonation").hasAnyAuthority("ADMIN", "USER")
                                 .requestMatchers("/api/v1/donations/delete/**").hasAuthority("ADMIN")
                                 .requestMatchers("/api/v1/donations/deleteAll").hasAuthority("ADMIN")
