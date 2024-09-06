@@ -134,8 +134,9 @@ public class PetServiceTest {
         verify(iPetRepository).deleteAll();
 
     }
+}
 
-    /*@Test
+/*    @Test
     public void testAdoptPet_Success() {
         Pet mockPet = new Pet();
         mockPet.setIdPet(1L);
@@ -151,9 +152,8 @@ public class PetServiceTest {
         verify(iPetRepository, times(1)).findById(1L);
         verify(userService, times(1)).findUserById(1L);
         verify(iPetRepository, times(1)).save(mockPet);
-    }*/
-}
-
+    }
+}*/
 
 
 
