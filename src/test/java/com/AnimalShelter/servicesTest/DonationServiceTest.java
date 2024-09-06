@@ -61,7 +61,7 @@ public class DonationServiceTest {
 
     @Test
     void testGetAllDonation() {
-        List<Donation> donations = new ArrayList<>();
+        List<Donation> donations = new ArrayList<Donation>();
         donations.add(new Donation(1L, 100.0d, "John Doe", null));
         donations.add(new Donation(2L, 200.0d, "Jane Smith", null));
         when(iDonationRepository.findAll()).thenReturn(donations);

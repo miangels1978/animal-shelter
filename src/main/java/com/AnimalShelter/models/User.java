@@ -22,15 +22,8 @@ import java.util.List;
 
 public class User implements UserDetails {
     @Id
-<<<<<<< HEAD
     @Column
     @GeneratedValue
-    private Long idUser;
-=======
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
->>>>>>> feature/update2
-
-    @Column(name = "idUser")
     private Long idUser;
 
     @Column(name = "username")
