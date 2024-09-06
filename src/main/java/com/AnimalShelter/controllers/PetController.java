@@ -60,7 +60,7 @@ public class PetController {
         petService.deleteAllPets();
     }
 
-    @PutMapping("/{idPet}")
+    @PutMapping("pet/{id}")
     public ResponseEntity<Pet> updatePet(@PathVariable Long idPet, @RequestBody Pet pet) {
         pet.setIdPet(idPet);
         Pet updatedPet = petService.updatePet(pet);

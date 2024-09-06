@@ -6,11 +6,9 @@ import com.AnimalShelter.models.User;
 import com.AnimalShelter.repositories.IPetRepository;
 import com.AnimalShelter.repositories.IUserRepository;
 import com.AnimalShelter.services.UserService;
-import lombok.var;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -29,7 +27,7 @@ import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
 
 
@@ -120,7 +118,7 @@ public class UserServiceTest {
         verify(iUserRepository).deleteAll();
 
     }
-    @org.junit.Test
+    @Test
     public void testUpdateUser() {
         // Given
         User user = new User();
