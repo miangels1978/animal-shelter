@@ -68,4 +68,5 @@ class PetControllerTest {
         assertEquals(Optional.of(pet), result);
         verify(petService, times(1)).getPetById(1L);
     }
+
 }

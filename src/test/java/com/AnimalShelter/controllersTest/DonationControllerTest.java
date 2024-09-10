@@ -2,6 +2,7 @@ package com.AnimalShelter.controllersTest;
 
 import com.AnimalShelter.controllers.DonationController;
 import com.AnimalShelter.models.Donation;
+import com.AnimalShelter.models.Pet;
 import com.AnimalShelter.services.DonationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -41,6 +44,7 @@ public class DonationControllerTest {
 
         mockMvc = MockMvcBuilders.standaloneSetup(donationController).build();
     }
+
     @Test
     public void testGetAllDonation() throws Exception {
 
@@ -60,7 +64,7 @@ public class DonationControllerTest {
     }
 
     @Test
-    public void testGetDonationById() throws Exception{
+    public void testGetDonationById() throws Exception {
 
         long id = 1L;
         Donation donation = new Donation();
