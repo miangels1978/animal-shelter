@@ -1,6 +1,5 @@
 package com.AnimalShelter.services;
 
-import com.AnimalShelter.models.ERole;
 import com.AnimalShelter.dtos.request.LoginRequest;
 import com.AnimalShelter.dtos.request.RegisterRequest;
 import com.AnimalShelter.dtos.response.AuthResponse;
