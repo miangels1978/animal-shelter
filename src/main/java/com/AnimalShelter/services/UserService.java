@@ -41,11 +41,6 @@ public class UserService {
         iUserRepository.deleteAll();
     }
 
-
-    public User findUserById(Long idUser) {
-        return iUserRepository.findById(idUser).orElseThrow();
-    }
-
     public User updateUser(User updatedUser) {
         Optional<User> existingUser = iUserRepository.findById(updatedUser.getIdUser());
         if (existingUser.isPresent()) {
